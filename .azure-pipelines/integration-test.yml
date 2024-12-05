@@ -13,7 +13,7 @@ jobs:
   strategy:
     matrix:
       cuda12:
-        containerImage: bench.azurecr.io/superbench:cuda12.4-msccl-ad42bfe-nccl-2.23
+        containerImage: superbench/superbench:v0.11.0-cuda12.2
 
   pool:
     name: mscclpp
