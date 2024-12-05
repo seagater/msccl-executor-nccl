@@ -1,10 +1,10 @@
 trigger:
-- add_azure_pipeline
+- main
 
 pr:
   branches:
     include:
-    - add_azure_pipeline
+    - main
   drafts: false
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         containerImage: bench.azurecr.io/superbench:cuda12.4-msccl-ad42bfe-nccl-2.23
 
   pool:
-    name: msccl-executor-nccl
+    name: mscclpp
   container:
     image: $[ variables['containerImage'] ]
     options: --privileged --ipc=host --gpus=all --ulimit memlock=-1:-1
