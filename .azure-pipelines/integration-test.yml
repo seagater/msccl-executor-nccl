@@ -32,7 +32,7 @@ jobs:
         export MSCCL_EXECUTOR_BUILD_PATH=$(pwd)/build
         cd ..
         git clone https://github.com/Azure/msccl-tests-nccl.git
-        cd msccl-test-nccl
+        cd msccl-tests-nccl
         export PATH=/usr/local/mpi/bin:$PATH
         make MPI=1 MPI_HOME=/usr/local/mpi CUDA_HOME=/usr/local/cuda-12 NCCL_HOME=$(dirname $(pwd))/msccl-executor-nccl/build -j
         export NCCL_TESTS_PATH=$(pwd)
