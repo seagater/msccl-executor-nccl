@@ -36,7 +36,6 @@ jobs:
         export PATH=/usr/local/mpi/bin:$PATH
         make MPI=1 MPI_HOME=/usr/local/mpi CUDA_HOME=/usr/local/cuda-12 NCCL_HOME=$MSCCL_EXECUTOR_BUILD_PATH -j
         export NCCL_TESTS_PATH=$(pwd)
-        cd ../msccl-executor-nccl
       workingDirectory: '$(System.DefaultWorkingDirectory)'
 
   - task: Bash@3
