@@ -60,7 +60,11 @@ jobs:
         which mpicc
         echo $MSCCL_EXECUTOR_BUILD_PATH
         echo $NCCL_TESTS_PATH
-        mpirun --allow-run-as-root -np 8 -x LD_LIBRARY_PATH=$(pwd)/build/lib:$LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_DEBUG_SUBSYS=INIT,ENV -x NCCL_MSCCL_ENABLE=1 ./msccl-tests-nccl/build/all_gather_perf -b 1K -e 1G -f 2 -o output.jsonl
+        echo $(pwd)
+        ls $(pwd)/
+        ls $(pwd)/build/lib/
+        ls $(pwd)/msccl-tests-nccl/build/lib/
+        /usr/local/mpi/bin/mpirun --allow-run-as-root -np 8 -x LD_LIBRARY_PATH=$(pwd)/build/lib:$LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_DEBUG_SUBSYS=INIT,ENV -x NCCL_MSCCL_ENABLE=1 ./msccl-tests-nccl/build/all_gather_perf -b 1K -e 1G -f 2 -o output.jsonl
       workingDirectory: '$(System.DefaultWorkingDirectory)'
 
   - task: Bash@3
