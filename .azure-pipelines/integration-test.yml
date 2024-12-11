@@ -30,7 +30,6 @@ jobs:
       script: |
         make -j src.build CUDA_HOME=/usr/local/cuda-12 NVCC_GENCODE="-gencode=arch=compute_80,code=sm_80"
         export MSCCL_EXECUTOR_BUILD_PATH=$(pwd)/build
-        cd ..
         git clone https://github.com/Azure/msccl-tests-nccl.git
         cd msccl-tests-nccl
         export PATH=/usr/local/mpi/bin:$PATH
@@ -61,7 +60,7 @@ jobs:
         which mpicc
         echo $MSCCL_EXECUTOR_BUILD_PATH
         echo $NCCL_TESTS_PATH
-        mpirun --allow-run-as-root -np 8 -x LD_LIBRARY_PATH=$MSCCL_EXECUTOR_BUILD_PATH/lib:$LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_DEBUG_SUBSYS=INIT,ENV -x NCCL_MSCCL_ENABLE=1 $NCCL_TESTS_PATH/build/all_gather_perf -b 1K -e 1G -f 2 -o output.jsonl
+        mpirun --allow-run-as-root -np 8 -x LD_LIBRARY_PATH=$(pwd)/build/lib:$LD_LIBRARY_PATH -x NCCL_DEBUG=WARN -x NCCL_DEBUG_SUBSYS=INIT,ENV -x NCCL_MSCCL_ENABLE=1 ./msccl-tests-nccl/build/all_gather_perf -b 1K -e 1G -f 2 -o output.jsonl
       workingDirectory: '$(System.DefaultWorkingDirectory)'
 
   - task: Bash@3
